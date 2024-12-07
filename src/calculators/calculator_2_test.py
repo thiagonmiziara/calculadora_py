@@ -8,7 +8,15 @@ class MockFlaskRequest:
 
 
 def test_calculate():
-    mock_request = MockFlaskRequest(body={"numbers": [1.33, 2.55, 3.69]})
+    mock_request = MockFlaskRequest(body={"numbers": [2.12, 4.62, 1.32]})
 
     calculator_2 = Calculator2()
-    calculator_2.calculate(mock_request)
+    formatted_response = calculator_2.calculate(mock_request)
+
+    assert isinstance(formatted_response, dict)
+    assert "data" in formatted_response
+    assert "Calculator" in formatted_response["data"]
+    assert "result" in formatted_response["data"]
+    assert formatted_response["data"]["Calculator"] == 2
+    assert formatted_response["data"]["result"] == 0.08
+    assert formatted_response == {"data": {"Calculator": 2, "result": 0.08}}

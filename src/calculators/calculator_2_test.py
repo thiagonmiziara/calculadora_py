@@ -1,6 +1,8 @@
 from typing import Dict
 from src.drivers.numpy_handler import NumpyHandler
 from .calculator_2 import Calculator2
+from src.drivers.interfaces.driver_handler_interface import DriverHandlerInterface
+from typing import List
 
 
 class MockFlaskRequest:
@@ -8,7 +10,12 @@ class MockFlaskRequest:
         self.json = body
 
 
-def test_calculate():
+class MockDriverHandler(DriverHandlerInterface):
+    def standard_deviation(self, numbers: List[float]) -> float:
+        return 0.08
+
+
+def test_calculate_integration():
     mock_request = MockFlaskRequest(body={"numbers": [2.12, 4.62, 1.32]})
     driver_handler = NumpyHandler()
     calculator_2 = Calculator2(driver_handler)
@@ -21,3 +28,18 @@ def test_calculate():
     assert formatted_response["data"]["Calculator"] == 2
     assert formatted_response["data"]["result"] == 0.08
     assert formatted_response == {"data": {"Calculator": 2, "result": 0.08}}
+
+
+def test_calculate():
+    mock_request = MockFlaskRequest(body={"numbers": [2.12, 4.62, 1.32]})
+    driver_handler = MockDriverHandler()
+    calculator_2 = Calculator2(driver_handler)
+    formatted_response = calculator_2.calculate(mock_request)
+
+    assert isinstance(formatted_response, dict)
+    assert "data" in formatted_response
+    assert "Calculator" in formatted_response["data"]
+    assert "result" in formatted_response["data"]
+    assert formatted_response["data"]["Calculator"] == 2
+    assert formatted_response["data"]["result"] == 12.5
+    assert formatted_response == {"data": {"Calculator": 2, "result": 12.5}}

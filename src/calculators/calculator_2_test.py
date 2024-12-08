@@ -1,4 +1,5 @@
 from typing import Dict
+from src.drivers.numpy_handler import NumpyHandler
 from .calculator_2 import Calculator2
 
 
@@ -9,8 +10,8 @@ class MockFlaskRequest:
 
 def test_calculate():
     mock_request = MockFlaskRequest(body={"numbers": [2.12, 4.62, 1.32]})
-
-    calculator_2 = Calculator2()
+    driver_handler = NumpyHandler()
+    calculator_2 = Calculator2(driver_handler)
     formatted_response = calculator_2.calculate(mock_request)
 
     assert isinstance(formatted_response, dict)

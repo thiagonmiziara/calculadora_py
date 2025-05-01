@@ -1,0 +1,23 @@
+# --- Requisição para Calculator 1 ---
+
+POST http://127.0.0.1:5000/calculator/1
+Content-Type: application/json
+
+{
+    "number": 150
+}
+
+###
+
+
+
+# --- Requisição para Calculator 2 ---
+
+POST http://127.0.0.1:5000/calculator/2
+Content-Type: application/json
+
+{
+    "numbers": [2.5, 3.1, 7.8, 10.2, 5.0]
+}
+
+###

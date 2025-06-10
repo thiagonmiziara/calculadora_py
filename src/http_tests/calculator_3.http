@@ -1,0 +1,8 @@
+# --- Requisição para Calculator 3 ---
+
+POST http://127.0.0.1:5000/calculator/3
+Content-Type: application/json
+
+{
+    "numbers": [1,1,1,1000]
+}

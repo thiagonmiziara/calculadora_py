@@ -1,8 +1,6 @@
-from typing import Dict
+from typing import Dict, List
 from src.drivers.numpy_handler import NumpyHandler
 from .calculator_2 import Calculator2
-from src.drivers.interfaces.driver_handler_interface import DriverHandlerInterface
-from typing import List
 
 
 class MockFlaskRequest:
@@ -10,7 +8,7 @@ class MockFlaskRequest:
         self.json = body
 
 
-class MockDriverHandler(DriverHandlerInterface):
+class MockDriverHandler:
     def standard_deviation(self, numbers: List[float]) -> float:
         return 0.08
 
